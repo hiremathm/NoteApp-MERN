@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import configureStore from './store/configureStore'
 import {Provider} from 'react-redux'
-import axios from 'axios'
+import axios from './config/config'
 // import _ from 'lodash'
 
 // actions
@@ -17,7 +17,7 @@ import App from './app'
 const store = configureStore()
 
 if(localStorage.getItem('userAuthToken')){
-    let url = "http://localhost:3002/users/account"
+    let url = "/users/account"
     axios({
         method: 'post',
         url: url,
@@ -31,7 +31,7 @@ if(localStorage.getItem('userAuthToken')){
     })
 
 
-    axios.get('http://localhost:3002/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+    axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
     .then(response => {
             if(!response.data.errors){
                 store.dispatch(setNotes(response.data))

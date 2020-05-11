@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'axios'
+import Axios from '../../config/config'
 
 import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
 

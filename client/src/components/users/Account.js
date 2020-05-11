@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'axios'
+import Axios from '../../config/config'
 import {connect} from 'react-redux'
 
 import {setUser} from '../../actions/user'

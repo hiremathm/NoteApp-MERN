@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../../config/config'
 
 class CategoryShow extends React.Component {
 
