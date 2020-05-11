@@ -7,7 +7,7 @@ import Form from './Form'
 
 class NewNote extends React.Component {
     handleSubmit = (formData) => {
-        let url = "http://localhost:3002/notes"
+        let url = "/notes"
         Axios({
             method: 'post',
             url: url,

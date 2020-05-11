@@ -11,13 +11,13 @@ class UserShow extends React.Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        Axios.get(`http://localhost:3002/users/${id}`)
+        Axios.get(`/users/${id}`)
             .then(response => {
                 console.log("user response", response)
                 this.setState({user: response.data.user, notes: response.data.notes})
             })
         
-            Axios.get(`http://localhost:3002/notes`)
+            Axios.get(`/notes`)
             .then(response => {
                 this.setState({
                     notes: response.data

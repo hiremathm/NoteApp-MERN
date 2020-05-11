@@ -13,7 +13,7 @@ class CategoryShow extends React.Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id 
-        axios.get(`http://localhost:3002/categories/${id}`)
+        axios.get(`/categories/${id}`)
             .then(response => {
                 console.log(response)
                 this.setState({category: response.data.category, notes: response.data.notes})

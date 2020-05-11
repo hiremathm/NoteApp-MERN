@@ -12,7 +12,7 @@ class EditNote extends React.Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        axios.get(`http://localhost:3002/notes/${id}`,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
+        axios.get(`/notes/${id}`,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 this.setState({note: response.data})
             })
@@ -23,7 +23,7 @@ class EditNote extends React.Component {
 
     handleSubmit = (formData) =>{
         const id = this.props.match.params.id
-        axios.put(`http://localhost:3002/notes/${id}`, formData,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
+        axios.put(`/notes/${id}`, formData,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
             .then(() => {
                 this.props.history.push(`/notes`)
                 // this.setState({note: response.data})

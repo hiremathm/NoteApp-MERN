@@ -7,7 +7,7 @@ import {resetUser} from '../../actions/user'
 class Logout extends React.Component {
     componentDidMount = () => {
         const token = localStorage.getItem("userAuthToken")
-        const url = "http://localhost:3002/users/logout"
+        const url = "/users/logout"
         if(token){
             Axios({
                 method: 'delete',

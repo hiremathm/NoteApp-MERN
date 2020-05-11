@@ -17,7 +17,7 @@ class NoteList extends React.Component {
     }
 
     componentDidMount = () => {
-        axios.get('http://localhost:3002/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+        axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 // this.setState({notes: response.data})
                 this.props.dispatch(setNotes(response.data))

@@ -24,7 +24,7 @@ class Register extends React.Component {
     submitHandle = (e) => {
         e.preventDefault()
 
-        let url = "http://localhost:3002/users"
+        let url = "/users"
         const formData = {
             name: this.state.name,
             mobile: this.state.mobile,

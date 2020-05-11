@@ -5,7 +5,7 @@ import Form from './Form'
 
 class CategoryNew extends React.Component {
     handleSubmit = (formData) => {
-        let url = "http://localhost:3002/categories"
+        let url = "/categories"
         axios({
                 method: 'post',
                 url: url, 

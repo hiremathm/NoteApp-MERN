@@ -53,7 +53,6 @@ class Form extends React.Component {
 
         const id = e.target.value.split('|')[0]
         const name = e.target.value.split[1]
-        console.log('sleecjlsdfklsdf tag is ', id, e.target.checked)
         if(e.target.checked){
             const tagItem = {_id: id, name: name}
             this.setState(prevState => ({
@@ -68,7 +67,7 @@ class Form extends React.Component {
     }
 
     componentDidMount = () => {
-        axios.get('http://localhost:3002/categories')
+        axios.get('/categories')
             .then(response => {
                 this.setState({categories: response.data})
             })
@@ -76,7 +75,7 @@ class Form extends React.Component {
                 console.log(error)
             })
 
-        axios.get('http://localhost:3002/users')
+        axios.get('/users')
             .then(response => {
                 this.setState({users: response.data})
             })
@@ -84,7 +83,7 @@ class Form extends React.Component {
                 console.log(error)
             })
 
-        axios.get('http://localhost:3002/tags')
+        axios.get('/tags')
             .then(response => {
                 this.setState({tags: response.data})
             })
@@ -110,7 +109,7 @@ class Form extends React.Component {
         }
         console.log("hello shiva", this.state.selectedTags) 
 
-        axios.get('http://localhost:3002/tags')
+        axios.get('/tags')
         .then(response => {
             this.setState({tags: response.data.map(tag =>{return {_id: tag._id, name: tag.name}})})
         })

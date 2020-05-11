@@ -14,7 +14,7 @@ class CategoryEdit extends React.Component {
 
     handleSubmit = (formData) => {
         const id = this.props.match.params.id
-        let url = `http://localhost:3002/categories/${id}`
+        let url = `/categories/${id}`
         axios({
                 method: 'put',
                 url: url, 
@@ -28,7 +28,7 @@ class CategoryEdit extends React.Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        axios.get(`http://localhost:3002/categories/${id}`)
+        axios.get(`/categories/${id}`)
             .then(response => {
                 this.setState({
                     category: response.data.category

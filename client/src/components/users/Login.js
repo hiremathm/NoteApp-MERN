@@ -28,7 +28,7 @@ class Login extends React.Component {
         }
 
         Axios({
-            url: 'http://localhost:3002/users/login',
+            url: '/users/login',
             method: 'POST',
             data: formData
         })

@@ -8,13 +8,11 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "server": "concurrently \"nodemon index.js\" \"npm start --prefix=client\"",
-    "install": "cd client && npm run build",
-    "heroku-prebuild": "npm install",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
-    "node": "^10.3.0", 
-    "npm": "^6.8.0" 
+    "node": "^12.14.1", 
+    "npm": "^6.13.4" 
   },
   "author": "",
   "license": "ISC",

@@ -11,7 +11,7 @@ class CategoryList extends React.Component {
     }
 
     componentDidMount = () => {
-        axios.get('http://localhost:3002/categories')
+        axios.get('/categories')
             .then(response => {
                 this.setState({categories: response.data})
             })

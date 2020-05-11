@@ -18,7 +18,7 @@ class Account extends React.Component {
 
     componentDidMount = () => {
         const token = localStorage.getItem("userAuthToken")
-        const url = "http://localhost:3002/users/account"
+        const url = "/users/account"
         if(token){
             Axios({
                 method: 'post',
@@ -37,7 +37,7 @@ class Account extends React.Component {
                 console.log("error", error)
             })
 
-            Axios.get('http://localhost:3002/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+            Axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 // this.setState({notes: response.data})
                 this.props.dispatch(setNotes(response.data))
@@ -65,7 +65,7 @@ class Account extends React.Component {
         const data = new FormData();
         data.append("image", imagesss[0], imagesss[0].name);
 
-        Axios.post('http://localhost:3002/upload/image', data)
+        Axios.post('/upload/image', data)
             .then(response => {
                 const image = response.data
                 this.setState({image})
