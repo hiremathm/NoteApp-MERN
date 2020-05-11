@@ -1,0 +1,35 @@
+{
+  "name": "expres-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "server": "concurrently \"nodemon index.js\" \"npm start --prefix=client\"",
+    "install": "cd client && npm run build",
+    "heroku-prebuild": "npm install",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "^10.3.0", 
+    "npm": "^6.8.0" 
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.4.1",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "file-type": "^14.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.7",
+    "multer": "^1.4.2",
+    "react-bootstrap": "^1.0.0",
+    "redux": "^4.0.5",
+    "validator": "^13.0.0"
+  }
+}

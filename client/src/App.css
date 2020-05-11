@@ -1,0 +1,7 @@
+.NewNote {
+    text-decoration: none;
+    display: inline-block;
+}
+.username {
+    background-color: red;
+}
