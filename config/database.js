@@ -5,7 +5,7 @@ const CONNECTION_URI = process.env.MONGODB_URI || "mongodb+srv://shivakumara:shi
 
 // const CONNECTION_URI =  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/note-app"
 
-const CONNECTION_URI = "mongodb://127.0.0.1:27017/note-app"
+// const CONNECTION_URI = "mongodb://127.0.0.1:27017/note-app"
 
 
 mongoose.connect(CONNECTION_URI,{useNewUrlParser: true,useCreateIndex: true})
