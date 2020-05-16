@@ -19,6 +19,7 @@ class NoteList extends React.Component {
     componentDidMount = () => {
         axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
+                console.log("notes ", response.data)
                 // this.setState({notes: response.data})
                 this.props.dispatch(setNotes(response.data))
             })
@@ -42,7 +43,7 @@ class NoteList extends React.Component {
                 <br/>
                 <div className="row">
                     {/* {this.state.notes.map(note => { */}
-                    {this.props.notes.map(note => {
+                    {this.props.notes && this.props.notes.map(note => {
                         return(
                             <div key = {note._id} className="col-sm-4">
                                     <Card body outline color={this.state.colors[Math.floor(Math.random() * 5)]}>
