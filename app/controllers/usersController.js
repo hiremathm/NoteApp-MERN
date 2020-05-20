@@ -1,8 +1,6 @@
 const User = require('../models/user')
 const Note = require('../models/note')
-const jwt = require('jsonwebtoken')
 const multer = require('multer')
-const fileType = require('file-type')
 
 module.exports.users = (req, res) => {
     User.find()
