@@ -16,16 +16,6 @@ app.use(express.json())
 app.use(cors())
 const port = process.env.PORT || 3050; 
 
-// home page
-app.get('/' , (req, res) =>{
-    res.send('Welcome to noteapp app')
-})
-
-// note routes
-// app.use('/notes,notesController)
-app.use('/', Router)
-app.use('/categories', categoriesRouter)
-app.use('/tags', tagsRouter)
 
 app.use(express.static(path.join(__dirname,"client/build"))) 
 app.get("*",(req,res) => { 
@@ -36,3 +26,14 @@ app.get("*",(req,res) => {
 app.listen(port, function(){
     console.log('listening to port ', port)
 })
+
+// home page
+app.get('/' , (req, res) =>{
+    res.send('Welcome to noteapp app')
+})
+
+// note routes
+// app.use('/notes,notesController)
+app.use('/', Router)
+app.use('/categories', categoriesRouter)
+app.use('/tags', tagsRouter)
