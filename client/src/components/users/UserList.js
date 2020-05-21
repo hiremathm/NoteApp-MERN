@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from '../../config/config'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class UserList extends React.Component {
     constructor(){
@@ -13,6 +14,7 @@ class UserList extends React.Component {
     componentDidMount = () => {
         axios.get('/users')
             .then(response => {
+
                 this.setState({users: response.data})
             })
             .catch(error => {
@@ -23,7 +25,7 @@ class UserList extends React.Component {
     render(){
         return (
             <div>
-                <h2>User List : {this.state.users.length}</h2>
+                <h2>User List : {this.props.users.length}</h2>
                 <table border="1">
                     <thead>
                         <tr>
@@ -33,7 +35,7 @@ class UserList extends React.Component {
                         </tr>    
                     </thead>
                     <tbody>
-                        {this.state.users.map(user => {
+                        {this.props.users.map(user => {
                         return <tr key={user._id}><td><Link to={`/users/${user._id}`}>{user.name}</Link></td><td>{user.email}</td><td>{user.mobile}</td></tr>
                         })}
                     </tbody>    
@@ -42,4 +44,9 @@ class UserList extends React.Component {
         )
     }
 }
-export default UserList;
+
+const mapStateToProps = (state) => {
+    return {users: state.users}
+}
+
+export default connect(mapStateToProps)(UserList);

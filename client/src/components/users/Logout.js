@@ -16,7 +16,7 @@ class Logout extends React.Component {
                 headers: {"x-auth": localStorage.getItem('userAuthToken')}
             })
             .then(response => {
-                console.log("response", response.data)
+                console.log("logout response", response.data)
                 localStorage.removeItem("userAuthToken")
                 this.props.dispatch(resetUser())
                 // this.props.handleIsAuthenticated(false)

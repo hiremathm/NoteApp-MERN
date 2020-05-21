@@ -40,6 +40,7 @@ class Account extends React.Component {
             Axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 // this.setState({notes: response.data})
+                console.log("account notes", response.data)
                 this.props.dispatch(setNotes(response.data))
             })
             .catch(error => {
