@@ -18,9 +18,9 @@ const port = process.env.PORT || 3050;
 
 
 app.use(express.static(path.join(__dirname,"client/build"))) 
-app.get("*",(req,res) => { 
-    res.sendFile(path.join(__dirname + "/client/build/index.html")) 
-}) 
+// app.get("*",(req,res) => { 
+//     res.sendFile(path.join(__dirname + "/client/build/index.html")) 
+// }) 
 
 // app listening to port 
 app.listen(port, function(){
