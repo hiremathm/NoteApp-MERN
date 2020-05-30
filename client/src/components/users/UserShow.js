@@ -11,13 +11,13 @@ class UserShow extends React.Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        Axios.get(`/users/${id}`)
+        Axios.get(`/users/${id}`,{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 console.log("user response", response)
                 this.setState({user: response.data.user, notes: response.data.notes})
             })
         
-            Axios.get(`/notes`)
+            Axios.get(`/notes`,{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 this.setState({
                     notes: response.data

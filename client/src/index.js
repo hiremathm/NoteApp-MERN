@@ -6,7 +6,7 @@ import axios from './config/config'
 // import _ from 'lodash'
 
 // actions
-import {setUser} from './actions/user'
+import {setUser, setUsers} from './actions/user'
 
 import {setNotes} from './actions/note'
 
@@ -37,6 +37,13 @@ if(localStorage.getItem('userAuthToken')){
                 store.dispatch(setNotes(response.data))
             }
     })
+
+    // axios.get('/users',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+    // .then(response => {
+    //         if(!response.data.errors){
+    //             store.dispatch(setUsers(response.data))
+    //         }
+    // })
 }
 
 store.subscribe(() => {

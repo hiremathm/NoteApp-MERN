@@ -3,6 +3,9 @@ const usersReducer = (state = {}, action) => {
         case 'SET_USER' : {
             return {...action.payload}
         }
+        case 'SET_USERS' : {
+            return {...action.payload}
+        }
         case 'RESET_USER' : {
             return {}
         }
