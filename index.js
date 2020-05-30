@@ -16,7 +16,6 @@ app.use(express.json())
 app.use(cors())
 const port = process.env.PORT || 3050; 
 
-
 app.use(express.static(path.join(__dirname,"client/build"))) 
 // app.get("*",(req,res) => { 
 //     res.sendFile(path.join(__dirname + "/client/build/index.html")) 
@@ -26,6 +25,8 @@ app.use(express.static(path.join(__dirname,"client/build")))
 app.listen(port, function(){
     console.log('listening to port ', port)
 })
+
+console.log('environment ', process.env.NODE_ENV)
 
 // home page
 app.get('/' , (req, res) =>{
