@@ -1,7 +1,10 @@
-.NewNote {
+/* .NewNote {
     text-decoration: none;
     display: inline-block;
-}
-.username {
-    background-color: red;
+} */
+
+.footer {
+    color: white;
+    font-size: 10px;
+    padding-left: 450px;   
 }

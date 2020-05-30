@@ -7,7 +7,7 @@ import _ from 'lodash'
 import {connect} from 'react-redux'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './App.css'
 // import notes
 import NotesList from './components/notes/NoteList'
 import ShowNote from './components/notes/ShowNote'
@@ -95,7 +95,9 @@ class App extends React.Component {
                 </Navbar>
                 <br/>
  
-
+                <Navbar color="dark" dark expand="sm" style={{height: '30px',position: 'fixed', bottom: 0, width: '100%'}}>
+                    <div className="footer">Made by Shivakumara Hiremath with NodeJS | ExpressJS | Mongodb | ReactJS</div>
+                </Navbar>
                 <Switch>
                     {/* Notes Routes */}
                     <Route path="/notes" component={NotesList} exact={true}></Route>

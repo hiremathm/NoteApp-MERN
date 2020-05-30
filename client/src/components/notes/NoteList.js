@@ -31,9 +31,9 @@ class NoteList extends React.Component {
 
     render(){
         return(
-            <div >
+            <div className="container" >
                 <div className="row">
-                    <div className="col-sm-9">
+                    <div className="col-sm-8">
                         <Button outline className="NewNote" color="primary" href="/notes/new">New Note</Button>
                     </div>
                     <div className="col-sm-3 username">
