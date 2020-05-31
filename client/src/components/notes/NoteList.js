@@ -6,6 +6,8 @@ import {Card, CardBody, Button, CardTitle, CardText} from 'reactstrap'
 import {connect} from 'react-redux'
 import {setNotes} from '../../actions/note'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../App.css'
 
 class NoteList extends React.Component {
     constructor(){
@@ -33,23 +35,22 @@ class NoteList extends React.Component {
         return(
             <div className="container" >
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-md-8 col-sm-8 col-xs-8 col-lg-8">
                         <Button outline className="NewNote" color="primary" href="/notes/new">New Note</Button>
                     </div>
                     <div className="col-sm-3 username">
                         Total Notes : {this.props.notes.length} by <b><small>{this.props.user.name}</small></b>
                     </div>
                 </div>
-                <br/>
+
                 <div className="row">
                     {/* {this.state.notes.map(note => { */}
                     {this.props.notes && this.props.notes.map(note => {
                         return(
-                            <div key = {note._id} className="col-sm-4">
-                                    <Card body outline color={this.state.colors[Math.floor(Math.random() * 5)]}>
+                            <div key = {note._id} className="col-sm-4 noteslist">
+                                    {/* <Card body outline color={this.state.colors[Math.floor(Math.random() * 5)]}>
                                         <CardBody>
                                             <CardTitle>
-                                                {/* <Link to={`/notes/${note._id}`} >{note.title.toUpperCase()}</Link> */}
                                                 {note.title.toUpperCase()}
                                             </CardTitle>
                                             <CardText>
@@ -72,8 +73,32 @@ class NoteList extends React.Component {
                                                 READ MORE
                                             </Link>
                                         </CardBody>
-                                    </Card>
-                                <br/>
+                                    </Card> */}
+                                <div className="card"> 
+                                    <div className="card-body">
+                                        <img src={require(`../../images/03221f0fc7631f5585a88ffef1fc096d`)} alt="Logo" width="310px" height="200px"/>
+                                        <p className="cardtitle">{note.title.toUpperCase()}</p>
+                                        {/* <p>{note.body.slice(0,100)}</p> */}
+                                        <div className="notetags">
+                                        <small className="text-muted">Tags : </small> 
+                                        {note.tags && note.tags.map(tag => {
+                                            return <small key={tag._id} className="text-muted"><Link key={tag._id} to={`/tags/${tag._id}`}>{tag.tag.name && tag.tag.name[0].toUpperCase()+ tag.tag.name.slice(1)} </Link> </small>
+                                        })}
+                                        </div>
+                                        <div className="notedate">
+                                            <small className="text-muted">Last updated at {`${new Date(note.created_at).getHours()}:${new Date(note.created_at).getMinutes()} , ${new Date(note.created_at).toDateString()}`} </small>
+                                            <small className="text-muted">, By {note.user.name}</small>
+                                        </div>
+                                        <div>
+                                            <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', margin: '10px' }}>
+                                                SHARE
+                                            </Link>
+                                            <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', margin: '10px' }}>
+                                                READ MORE
+                                            </Link>
+                                        </div>
+                                    </div>     
+                                </div>
                             </div>
                         )
                     })}
