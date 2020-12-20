@@ -4,12 +4,14 @@ console.log("env", environment)
 let axios = ''
 if(environment === 'development'){
   axios = Axios.create({
-     baseURL: "http://localhost:3050"
+     baseURL: "http://localhost:6060"
   });
 }else{
   axios = Axios.create({
     baseURL: "/"
   });
 }
+
+console.log("AXIOS", axios)
 
 export default axios;

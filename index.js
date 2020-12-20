@@ -14,11 +14,11 @@ const app = express()
 // application level middle ware function
 app.use(express.json())
 app.use(cors())
-const port = process.env.PORT || 3050; 
-
+const port = process.env.PORT || 6060; 
+// const port = 6060
 app.use(express.static(path.join(__dirname,"client/build"))) 
 // app.get("*",(req,res) => { 
-//     res.sendFile(path.join(__dirname + "/client/build/index.html")) 
+    // res.sendFile(path.join(__dirname + "/client/build/index.html")) 
 // }) 
 
 // app listening to port 

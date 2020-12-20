@@ -7,12 +7,14 @@ import Form from './Form'
 
 class NewNote extends React.Component {
     handleSubmit = (formData) => {
+        let token = localStorage.getItem('userAuthToken')
+        console.log("TOKEN IN POST CREATION", token)
         let url = "/notes"
         Axios({
             method: 'post',
             url: url,
             data: formData,
-            headers: {"x-auth": localStorage.getItem('userAuthToken')}
+            headers: {"x-auth": token}
         })
         .then(response => {
             console.log("response", response)

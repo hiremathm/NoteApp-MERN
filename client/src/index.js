@@ -30,7 +30,6 @@ if(localStorage.getItem('userAuthToken')){
         }
     })
 
-
     axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
     .then(response => {
             if(!response.data.errors){
