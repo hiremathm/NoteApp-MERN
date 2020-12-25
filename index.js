@@ -35,6 +35,6 @@ app.get('/' , (req, res) =>{
 
 // note routes
 // app.use('/notes,notesController)
-app.use('/', Router)
-app.use('/categories', categoriesRouter)
-app.use('/tags', tagsRouter)
+app.use('/api/', Router)
+app.use('/api/categories', categoriesRouter)
+app.use('/api/tags', tagsRouter)

@@ -4,11 +4,11 @@ console.log("env", environment)
 let axios = ''
 if(environment === 'development'){
   axios = Axios.create({
-     baseURL: "http://localhost:6060"
+     baseURL: "http://localhost:6060/api/"
   });
 }else{
   axios = Axios.create({
-    baseURL: "/"
+    baseURL: "/api/"
   });
 }
 
