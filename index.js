@@ -17,9 +17,10 @@ app.use(cors())
 const port = process.env.PORT || 6060; 
 // const port = 6060
 app.use(express.static(path.join(__dirname,"client/build"))) 
-// app.get("*",(req,res) => { 
+app.get("*",(req,res) => { 
     // res.sendFile(path.join(__dirname + "/client/build/index.html")) 
-// }) 
+ 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+}) 
 
 // app listening to port 
 app.listen(port, function(){
