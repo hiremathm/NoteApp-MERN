@@ -1,7 +1,7 @@
 import React from 'react'
-// import axios from '../../config/config'
+import axios from '../../config/config'
 import Form from './Form'
-import axios from 'axios'
+// import axios from 'axios'
 
 
 class EditNote extends React.Component {

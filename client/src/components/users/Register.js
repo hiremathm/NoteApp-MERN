@@ -1,6 +1,6 @@
 import React from 'react'
-// import axios from '../../config/config'
-import axios from 'axios'
+import axios from '../../config/config'
+// import axios from 'axios'
 
 import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
-// import axios from '../../config/config'
-import axios from 'axios'
+import axios from '../../config/config'
+// import axios from 'axios'
 
 class Login extends React.Component {
     constructor(){

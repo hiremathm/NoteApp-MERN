@@ -1,6 +1,6 @@
 import React from 'react'
-// import axios from '../../config/config'
-import axios from 'axios'
+import axios from '../../config/config'
+// import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {removeNote} from '../../actions/note'

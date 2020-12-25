@@ -1,6 +1,6 @@
 import React from 'react'
-// import Axios from '../../config/config'
-import axios from 'axios'
+import axios from '../../config/config'
+// import axios from 'axios'
 
 import {connect} from 'react-redux'
 import {resetUser} from '../../actions/user'

@@ -1,5 +1,5 @@
 import React from 'react'
-// import Axios from '../../config/config'
+// import axios from '../../config/config'
 import axios from 'axios'
 class UserShow extends React.Component {
     constructor(){

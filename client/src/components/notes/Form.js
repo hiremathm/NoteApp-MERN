@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-// import axios from '../../config/config'
-import axios from 'axios'
+import axios from '../../config/config'
+// import axios from 'axios'
 
 class Form extends React.Component {
 
