@@ -1,5 +1,6 @@
 import React from 'react'
-import Axios from '../../config/config'
+// import axios from '../../config/config'
+import axios from 'axios'
 
 import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
 
@@ -32,7 +33,7 @@ class Register extends React.Component {
             password: this.state.password
         }
         
-        Axios({
+        axios({
             method: 'post',
             url: url,
             data: formData

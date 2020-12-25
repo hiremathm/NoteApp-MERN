@@ -1,5 +1,6 @@
 import React from 'react'
-import Axios from '../../config/config'
+// import axios from '../../config/config'
+import axios from 'axios'
 import {connect} from 'react-redux'
 
 import {setUser} from '../../actions/user'
@@ -20,7 +21,7 @@ class Account extends React.Component {
         const token = localStorage.getItem("userAuthToken")
         const url = "/users/account"
         if(token){
-            Axios({
+            axios({
                 method: 'post',
                 url: url,
                 data: {},
@@ -37,7 +38,7 @@ class Account extends React.Component {
                 console.log("error", error)
             })
 
-            Axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+            axios.get('/notes',{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 // this.setState({notes: response.data})
                 console.log("account notes", response.data)
@@ -66,7 +67,7 @@ class Account extends React.Component {
         const data = new FormData();
         data.append("image", imagesss[0], imagesss[0].name);
 
-        Axios.post('/upload/image', data)
+        axios.post('/upload/image', data)
             .then(response => {
                 const image = response.data
                 this.setState({image})

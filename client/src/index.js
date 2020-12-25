@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import configureStore from './store/configureStore'
 import {Provider} from 'react-redux'
-import axios from './config/config'
+// import axios from './config/config'
+import axios from 'axios'
 // import _ from 'lodash'
 
 // actions

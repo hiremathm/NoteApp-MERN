@@ -1,6 +1,7 @@
 import React from 'react'
 import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
-import Axios from '../../config/config'
+// import axios from '../../config/config'
+import axios from 'axios'
 
 class Login extends React.Component {
     constructor(){
@@ -27,7 +28,7 @@ class Login extends React.Component {
             password: this.state.password
         }
 
-        Axios({
+        axios({
             url: '/users/login',
             method: 'POST',
             data: formData

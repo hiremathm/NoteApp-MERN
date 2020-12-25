@@ -1,5 +1,6 @@
 import React from 'react'
-import Axios from '../../config/config'
+// import Axios from '../../config/config'
+import axios from 'axios'
 class UserShow extends React.Component {
     constructor(){
         super()
@@ -11,13 +12,13 @@ class UserShow extends React.Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        Axios.get(`/users/${id}`,{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+        axios.get(`/users/${id}`,{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 console.log("user response", response)
                 this.setState({user: response.data.user, notes: response.data.notes})
             })
         
-            Axios.get(`/notes`,{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
+            axios.get(`/notes`,{"headers": {"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 this.setState({
                     notes: response.data

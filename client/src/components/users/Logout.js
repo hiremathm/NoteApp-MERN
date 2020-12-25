@@ -1,5 +1,6 @@
 import React from 'react'
-import Axios from '../../config/config'
+// import Axios from '../../config/config'
+import axios from 'axios'
 
 import {connect} from 'react-redux'
 import {resetUser} from '../../actions/user'
@@ -9,7 +10,7 @@ class Logout extends React.Component {
         const token = localStorage.getItem("userAuthToken")
         const url = "/users/logout"
         if(token){
-            Axios({
+            axios({
                 method: 'delete',
                 url: url,
                 data: {},

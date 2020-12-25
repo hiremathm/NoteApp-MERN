@@ -1,5 +1,7 @@
 import React from 'react'
-import Axios from '../../config/config'
+// import Axios from '../../config/config'
+import axios from 'axios'
+
 import {addNote} from '../../actions/note'
 import {connect} from 'react-redux'
 import Form from './Form'
@@ -10,7 +12,7 @@ class NewNote extends React.Component {
         let token = localStorage.getItem('userAuthToken')
         console.log("TOKEN IN POST CREATION", token)
         let url = "/notes"
-        Axios({
+        axios({
             method: 'post',
             url: url,
             data: formData,
