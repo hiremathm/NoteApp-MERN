@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {Link, NavLink} from 'react-router-dom'
+import { FaList, FaUserAlt} from 'react-icons/fa';
+import { IoLogIn, IoLogOut, IoList, IoPersonCircle } from "react-icons/io5";
 
 import MainHeader from './MainHeader'
 import '../css/MainNavigation.css'
@@ -28,29 +30,29 @@ const MainNavigation = (props) => {
 				isDrawerOpen && ( 
 					<SideDrawer>
 						<nav className = "main-navigation__drawer-nav">
-							<NavLink to = "/notes"> 
-								My Notes
-							</NavLink>
-							<NavLink to = "/categories"> 
-								Categories
-							</NavLink>
-							<NavLink to = "/users"> 
-								Users
-							</NavLink>
-
-
+							<NavLink to="/" className="home"><h2>Keep Notes</h2></NavLink>
 							{	_.isEmpty(props.user) ?
 			                	(
 				             		<>
 				                    	<NavLink to="/register">Register</NavLink>
-				                    	<NavLink to="/login">Login</NavLink>
+				                    	<NavLink to="/login"><IoLogIn size = {25} className = "icon"/> Login</NavLink>
 				                	</>
 			                	)
 			                	:
 			                	(
 			                		<>
-									<NavLink to="/Account">Account</NavLink> 
-									<NavLink to="/Logout">Logout</NavLink>
+			                		<NavLink to = "/notes" onClick = {setDrawer}> 
+										<IoList size = {25} className = "icon"/> My Notes									
+									</NavLink>
+									<NavLink to = "/categories" onClick = {setDrawer}> 
+										<IoList size = {25}  className = "icon"/> Categories
+									</NavLink>
+									<NavLink to = "/users" onClick = {setDrawer}> 
+										<IoList size = {25} className = "icon"/> All Users
+									</NavLink>
+
+									<NavLink to="/Account" onClick = {setDrawer}><IoPersonCircle size = {25} className = "icon"/> Account</NavLink> 
+									<NavLink to="/Logout" onClick = {setDrawer}><IoLogOut size = {25} className = "icon"/> Logout</NavLink>
 			            			</>
 			            		)                     
 							}
