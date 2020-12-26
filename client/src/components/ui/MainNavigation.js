@@ -7,6 +7,7 @@ import MainHeader from './MainHeader'
 import '../css/MainNavigation.css'
 import NavLinks from './NavLinks'
 import SideDrawer from './SideDrawer'
+import SideHeader from './SideHeader'
 import BackDrop from './BackDrop'
 
 import {connect} from 'react-redux'
@@ -73,6 +74,41 @@ const MainNavigation = (props) => {
 				<nav className = "main-navigation__header-nav">
 					<NavLinks/> 
 				</nav>
+
+			{/*!isDrawerOpen ? (
+				<SideHeader>
+					<nav className = "main-navigation__web-drawer-nav">
+						<NavLink to="/" className="web-home"><h2>Keep Notes</h2></NavLink>
+
+						{	_.isEmpty(props.user) ?
+		                	(
+			             		<>
+			                    	<NavLink to="/register">Register</NavLink>
+			                    	<NavLink to="/login"><IoLogIn size = {25} className = "icon"/> Login</NavLink>
+			                	</>
+		                	)
+		                	:
+		                	(
+		                		<>
+		                		<NavLink to = "/notes"> 
+									<IoList size = {25} className = "web-icon"/> My Notes									
+								</NavLink>
+								<NavLink to = "/categories"> 
+									<IoList size = {25}  className = "web-icon"/> Categories
+								</NavLink>
+								<NavLink to = "/users"> 
+									<IoList size = {25} className = "web-icon"/> All Users
+								</NavLink>
+
+								<NavLink to="/Account"><IoPersonCircle size = {25} className = "web-icon"/> Account</NavLink> 
+								<NavLink to="/Logout"><IoLogOut size = {25} className = "web-icon"/> Logout</NavLink>
+		            			</>
+		            		)                     
+						}
+					</nav>
+				</SideHeader>
+				) : (null)*/
+			}
 			</MainHeader>
 		</React.Fragment>
 	)

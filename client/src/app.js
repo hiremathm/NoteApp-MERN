@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Route,Switch,Link} from 'react-router-dom'
+import {BrowserRouter, Route,Switch,Link, Redirect} from 'react-router-dom'
 import {Navbar, NavbarBrand, Nav, NavItem} from 'reactstrap'
 import _ from 'lodash'
 
@@ -105,13 +105,7 @@ class App extends React.Component {
                         }}></Route> */}
                         <Route path="/account" component={Account} exact={true}></Route>
                         <Route path="/logout" component={Logout} exact={true}></Route>
-                        {/* <Route path="/logout" render={(props) => {
-                               return <Logout {...props} handleIsAuthenticated = {this.handleIsAuthenticated}/>
-                        }}></Route> */}
-
-                        <Route render={() => {
-                               return <h3>Welcome to Note App</h3>
-                        }}></Route>
+                        <Redirect to="/notes" />
                     </Switch>
                 </main>
             </BrowserRouter>

@@ -71,9 +71,7 @@
 .main-navigation__drawer-nav a:hover{
   cursor: pointer;
   overflow: visible;
-      outline:none;
-
-
+  outline:none;
 }
 
 @media (min-width: 768px) {
