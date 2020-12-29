@@ -86,7 +86,7 @@ class Account extends React.Component {
                         <h2>Account Information</h2>
                         
                         {
-                           <img src={require(`../../images/03221f0fc7631f5585a88ffef1fc096d`)} alt="Logo" width="350px" height="200px"/>
+                           // <img src={require(`../../images/03221f0fc7631f5585a88ffef1fc096d`)} alt="Logo" width="350px" height="200px"/>
                             // this.props.user.image && (<img src={require(`${this.props.user.image}`)} alt="Logo" width="350px" height="200px"/>)
                         }
                         <h4>Name : {this.props.user && this.props.user.name}</h4>

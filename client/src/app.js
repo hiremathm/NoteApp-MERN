@@ -1,7 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Route,Switch,Link, Redirect} from 'react-router-dom'
-import {Navbar, NavbarBrand, Nav, NavItem} from 'reactstrap'
-import _ from 'lodash'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
 // actions
 import {connect} from 'react-redux'

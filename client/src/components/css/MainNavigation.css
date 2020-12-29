@@ -41,6 +41,16 @@
 	font-size: 20px;
 }
 
+.main-navigation__web-drawer-nav {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 2rem;
+	font-size: 20px;
+}
+
 .home {
 	text-align: center;
 }
@@ -53,8 +63,9 @@
 	border-bottom-width: 1px;
 	border-bottom-color: white;
 	border-bottom-style: solid;
-
 }
+
+
 
 .icon{
 	margin-left: 1rem;

@@ -130,8 +130,6 @@ module.exports.removeTag = function(req, res){
     //     })
     // })
 
-    console.log("noteid", noteId)
-    console.log('tagid', tagId)
     // Second of removing the records using $pull
     Note.findOneAndUpdate({_id: noteId}, {$pull: {
         tags: {_id: tagId}}},{new: true}).populate('category').populate('tags.tag',['name']).populate('user')

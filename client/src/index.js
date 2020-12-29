@@ -7,7 +7,7 @@ import axios from './config/config'
 // import _ from 'lodash'
 
 // actions
-import {setUser, setUsers} from './actions/user'
+import {setUser} from './actions/user'
 
 import {setNotes} from './actions/note'
 

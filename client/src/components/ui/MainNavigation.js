@@ -1,13 +1,11 @@
 import React, {useState} from 'react'
 import {Link, NavLink} from 'react-router-dom'
-import { FaList, FaUserAlt} from 'react-icons/fa';
 import { IoLogIn, IoLogOut, IoList, IoPersonCircle } from "react-icons/io5";
 
 import MainHeader from './MainHeader'
 import '../css/MainNavigation.css'
 import NavLinks from './NavLinks'
 import SideDrawer from './SideDrawer'
-import SideHeader from './SideHeader'
 import BackDrop from './BackDrop'
 
 import {connect} from 'react-redux'
