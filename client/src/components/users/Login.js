@@ -49,6 +49,8 @@ const Login = props => {
     const [isLogin, setIsLogin] = useState(true)
     const [isInvalidInput, setInvalidInput] = useState(false)
     const [invalidInputError, setInvalidInputError] = useState()
+    const [isLoading, setIsLoading] = useState(false)
+
     const [formState, inputHandler, setFormData] = useForm({
             email: {
                 value: '',
@@ -110,6 +112,8 @@ const Login = props => {
             url = "/users"
         }
 
+        setIsLoading(true)
+
         axios({
             url: url,
             method: 'POST',
@@ -120,6 +124,7 @@ const Login = props => {
                 setInvalidInput(true)
                 setInvalidInputError(user.data.errors)
                 console.log("user logged errors", user.data.errors)
+                setIsLoading(false)
             }else{
          
                 if (isLogin){
@@ -127,12 +132,14 @@ const Login = props => {
                     auth.login()
                     props.history.push('/notes')
                 }else{
-                    props.history.push('/login')
+                    console.log("SIGNUP RESPONSE", user)
+                    setIsLogin(true)
                 }
             }
         })
         .catch(error => {
             console.log("logged in error is ", error)
+            setIsLoading(false)
         })
     }
 
