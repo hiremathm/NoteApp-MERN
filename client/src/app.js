@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useCallback, useEffect} from 'react'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
 // actions
@@ -27,88 +27,71 @@ import Account from './components/users/Account'
 import Logout from './components/users/Logout'
 
 import MainNavigation from './components/ui/MainNavigation'
-class App extends React.Component {
 
-    render(){
-        return (
+import {AuthContext} from './context/AuthContext'
+
+const App = (props) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    
+    const login = useCallback(() => {
+        setIsLoggedIn(true)
+    },[])
+
+    const logout = useCallback(() => {
+        setIsLoggedIn(false)
+    },[])
+
+
+    useEffect(() => {
+        if(localStorage.getItem('userAuthToken')){
+            setIsLoggedIn(true)
+        }else{
+            setIsLoggedIn(false)
+        }       
+    })
+
+
+    return (
+        <AuthContext.Provider value = {{isLoggedIn, login, logout}}>
             <BrowserRouter>
                 <MainNavigation />
 
- {/*               <Navbar color="dark" dark expand="sm" style={{height: '60px'}}>
-                    <NavbarBrand> 
-                        Keep Note 
-                    </NavbarBrand>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <Link to="/notes" style={{ textDecoration: 'none', margin: '10px' }}>Notes</Link> 
-                        </NavItem> 
-                        <NavItem>
-                            <Link to="/categories" style={{ textDecoration: 'none', margin: '10px' }} >Categories</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/users" style={{ textDecoration: 'none', margin: '10px' }} >Users</Link>                            
-                        </NavItem>
-                    </Nav>
-                        {_.isEmpty(this.props.user) ?
-                            (
-                                <Nav>            
-                                    <NavItem>
-                                        <Link to="/register" style={{ textDecoration: 'none', margin: '10px' }}>Register</Link>
-                                    </NavItem>
-                                    <NavItem>
-                                        <Link to="/login" style={{ textDecoration: 'none', margin: '10px' }}>Login</Link>
-                                    </NavItem>
-                                </Nav>  
-                                )
-                            :
-                            (
-                                <Nav>
-                                    <NavItem>
-                                        <Link to="/Account" style={{ textDecoration: 'none', margin: '10px' }}>Account</Link>
-                                    </NavItem> 
-                                    <NavItem>
-                                         <Link to="/Logout" style={{ textDecoration: 'none', margin: '10px' }}>Logout</Link>
-                                    </NavItem>
-                                </Nav>        
-                            )
-                             
-                        }              
-                </Navbar>
-                <br/>
- 
-                <Navbar color="dark" dark expand="sm" style={{height: '30px',position: 'fixed', bottom: 0, width: '100%'}}>
-                    <div className="footer">Made by Shivakumara Hiremath with NodeJS | ExpressJS | Mongodb | ReactJS</div>
-                </Navbar>*/}
                 <main>
                     <Switch>
-                        {/* Notes Routes */}
-                        <Route path="/notes" component={NotesList} exact={true}></Route>
-                        <Route path="/notes/new" component={NewNote} exact={true}></Route>
-                        <Route path="/notes/edit/:id" component={EditNote} ></Route>
-                        <Route path="/notes/:id" component={ShowNote} exact={true}></Route>
-                    
-                        {/* Categories Routes */}
-                        <Route path="/categories" component = {CategoryList} exact={true}></Route>
-                        <Route path="/categories/new" component = {CategoryNew} exact={true}></Route>
-                        <Route path="/categories/edit/:id" component={CategoryEdit} exact={true}></Route>
-                        <Route path="/categories/:id" component={CategoryShow} exact={true}></Route>
+                        {isLoggedIn ? (
+                            <>
+                                {/* Notes Routes */}
+                                <Route path="/notes" component={NotesList} exact={true}></Route>
+                                <Route path="/notes/new" component={NewNote} exact={true}></Route>
+                                <Route path="/notes/edit/:id" component={EditNote} ></Route>
+                                <Route path="/notes/:id" component={ShowNote} exact={true}></Route>
+                            
+                                {/* Categories Routes */}
+                                <Route path="/categories" component = {CategoryList} exact={true}></Route>
+                                <Route path="/categories/new" component = {CategoryNew} exact={true}></Route>
+                                <Route path="/categories/edit/:id" component={CategoryEdit} exact={true}></Route>
+                                <Route path="/categories/:id" component={CategoryShow} exact={true}></Route>
 
-                        {/* Users Routes */}
-                        <Route path="/users" component={User} exact={true}></Route>
-                        <Route path="/users/:id" component = {UserShow} exact={true}></Route>
-                        <Route path="/register" component ={Register} exact={true}></Route>
-                        <Route path="/login" component={Login} exact={true}></Route>
-                        {/* <Route path="/login" render={(props) => {
-                               return <Login {...props} handleIsAuthenticated = {this.handleIsAuthenticated}/>
-                        }}></Route> */}
-                        <Route path="/account" component={Account} exact={true}></Route>
-                        <Route path="/logout" component={Logout} exact={true}></Route>
-                        <Redirect to="/notes" />
+                                {/* Users Routes */}
+                                <Route path="/users" component={User} exact={true}></Route>
+                                <Route path="/users/:id" component = {UserShow} exact={true}></Route>
+                                <Route path="/register" component ={Register} exact={true}></Route>
+                                <Route path="/account" component={Account} exact={true}></Route>
+                                <Route path="/logout" component={Logout} exact={true}></Route>
+                                <Redirect to="/notes" />
+                            </>
+                        ):(
+                            <>
+                                <Route path="/login" component={Login} exact={true}></Route>
+                                <Redirect to="/login" />
+                            </>
+                        )}
+
                     </Switch>
                 </main>
             </BrowserRouter>
-        )
-    }
+        </AuthContext.Provider>
+    )
 }
 
 const mapStateToProps = (state) => {

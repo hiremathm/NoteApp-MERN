@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import { IoLogIn, IoLogOut, IoList, IoPersonCircle } from "react-icons/io5";
 
@@ -12,8 +12,11 @@ import {connect} from 'react-redux'
 
 import _ from 'lodash'
 
+import {AuthContext} from '../../context/AuthContext'
+
 const MainNavigation = (props) => {
 	const [isDrawerOpen, setDrawerState] = useState(false)
+	const auth = useContext(AuthContext)
 
 	const setDrawer = () => {
 		console.log("set drawer")
@@ -30,10 +33,11 @@ const MainNavigation = (props) => {
 					<SideDrawer>
 						<nav className = "main-navigation__drawer-nav">
 							<NavLink to="/" className="home"><h2>Keep Notes</h2></NavLink>
-							{	_.isEmpty(props.user) ?
+							{	!auth.isLoggedIn ?
+								// _.isEmpty(props.user) ?
 			                	(
 				             		<>
-				                    	<NavLink to="/login"><IoLogIn size = {25} className = "icon"/> Login</NavLink>
+				                    	<NavLink to="/login" onClick = {setDrawer}><IoLogIn size = {25} className = "icon"/> Login</NavLink>
 				                	</>
 			                	)
 			                	:
@@ -71,41 +75,6 @@ const MainNavigation = (props) => {
 				<nav className = "main-navigation__header-nav">
 					<NavLinks/> 
 				</nav>
-
-			{/*!isDrawerOpen ? (
-				<SideHeader>
-					<nav className = "main-navigation__web-drawer-nav">
-						<NavLink to="/" className="web-home"><h2>Keep Notes</h2></NavLink>
-
-						{	_.isEmpty(props.user) ?
-		                	(
-			             		<>
-			                    	<NavLink to="/register">Register</NavLink>
-			                    	<NavLink to="/login"><IoLogIn size = {25} className = "icon"/> Login</NavLink>
-			                	</>
-		                	)
-		                	:
-		                	(
-		                		<>
-		                		<NavLink to = "/notes"> 
-									<IoList size = {25} className = "web-icon"/> My Notes									
-								</NavLink>
-								<NavLink to = "/categories"> 
-									<IoList size = {25}  className = "web-icon"/> Categories
-								</NavLink>
-								<NavLink to = "/users"> 
-									<IoList size = {25} className = "web-icon"/> All Users
-								</NavLink>
-
-								<NavLink to="/Account"><IoPersonCircle size = {25} className = "web-icon"/> Account</NavLink> 
-								<NavLink to="/Logout"><IoLogOut size = {25} className = "web-icon"/> Logout</NavLink>
-		            			</>
-		            		)                     
-						}
-					</nav>
-				</SideHeader>
-				) : (null)*/
-			}
 			</MainHeader>
 		</React.Fragment>
 	)

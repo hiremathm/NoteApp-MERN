@@ -36,7 +36,6 @@ class NoteList extends React.Component {
             <div className="container" >
                 <div className="row">
                     <div className="col-md-8 col-sm-8 col-xs-8 col-lg-8">
-                        {/*<Button outline className="NewNote" color="primary" href="/notes/new">New Note</Button>*/}
                         { <Link to="/notes/new">Create Note</Link> }
                     </div>
                     <div className="col-sm-3 username">

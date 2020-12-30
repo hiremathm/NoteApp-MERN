@@ -1,39 +1,52 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import _ from 'lodash'
 import '../css/NavLinks.css'
 
-const NavLinks = (props) => {
-	return <ul className = "nav-links">
-		<li>
-			<NavLink to = "/notes"> 
-				My Notes
-			</NavLink>
-			<NavLink to = "/categories"> 
-				Categories
-			</NavLink>
-			<NavLink to = "/users"> 
-				Users
-			</NavLink>
+import {AuthContext} from '../../context/AuthContext'
 
-			{_.isEmpty(props.user) ?
-                (
-	             	<>
-	                    <NavLink to="/register">Register</NavLink>
+const NavLinks = (props) => {
+	const auth = useContext(AuthContext)
+
+	return <ul className = "nav-links">
+		{!auth.isLoggedIn ?
+			// _.isEmpty(props.user) ?
+            (
+            	<>
+	             	<li>
 	                    <NavLink to="/login">Login</NavLink>
-	                </>
-                )
-                :
-                (
-                	<>
-					<NavLink to="/Account">Account</NavLink> 
-					<NavLink to="/Logout">Logout</NavLink>
-            		</>
-            	)                 
-            }      
-		</li>
+	                </li>
+                </>
+            )
+            :
+            (
+            	<>
+	            	<li>
+						<NavLink to = "/notes"> 
+							My Notes
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to = "/categories"> 
+							Categories
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to = "/users"> 
+							Users
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/Account">Account</NavLink> 
+					</li>
+					<li>
+						<NavLink to="/Logout">Logout</NavLink>
+					</li>
+				</>
+        	)                 
+        }      
 	</ul>
 }
 

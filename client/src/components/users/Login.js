@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useReducer } from 'react'
+import React, { useState, useContext} from 'react'
 import { useForm } from '../../hooks/form-hook'
 import axios from '../../config/config'
 // import axios from 'axios'
@@ -10,8 +10,10 @@ import Card from '../ui/Card'
 
 import '../css/Auth.css'
 import '../css/Button.css'
-
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_MIN} from '../../util/validators'
+
+
+import {AuthContext} from '../../context/AuthContext'
 
 /*const loginReducer = (state, action) => {
     switch(action.type){
@@ -58,6 +60,7 @@ const Login = props => {
             }
         }, false)
 
+    const auth = useContext(AuthContext)
 
 /*    const [formState, dispactchLoginForm] = useReducer(loginReducer, {
         inputs: {
@@ -119,13 +122,13 @@ const Login = props => {
                 console.log("user logged errors", user.data.errors)
             }else{
                 localStorage.setItem('userAuthToken', user.data.token)
-                props.history.push('/account')
+                auth.login()
+                props.history.push('/notes')
             }
         })
         .catch(error => {
             console.log("logged in error is ", error)
         })
-
     }
 
 
