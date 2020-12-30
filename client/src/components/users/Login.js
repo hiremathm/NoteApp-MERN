@@ -121,9 +121,14 @@ const Login = props => {
                 setInvalidInputError(user.data.errors)
                 console.log("user logged errors", user.data.errors)
             }else{
-                localStorage.setItem('userAuthToken', user.data.token)
-                auth.login()
-                props.history.push('/notes')
+         
+                if (isLogin){
+                    localStorage.setItem('userAuthToken', user.data.token)
+                    auth.login()
+                    props.history.push('/notes')
+                }else{
+                    props.history.push('/login')
+                }
             }
         })
         .catch(error => {
