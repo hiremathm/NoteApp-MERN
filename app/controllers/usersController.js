@@ -14,14 +14,21 @@ module.exports.users = (req, res) => {
 
 module.exports.create = (req,res) => {
     const body = req.body
-    const user = new User(body)
-    user.save()
-        .then(user => {
-            res.json(user)
-        })
-        .catch(error=> {
-            res.json(error)
-        })
+    
+    let user = User.find({email: body.email})
+
+    if(user){
+        res.send({errors:'Email already exists, Please try login!'})
+    }else{
+        user = new User(body)
+        user.save()
+            .then(user => {
+               res.json(user)
+            })
+            .catch(error=> {
+                res.json(error)
+            })
+    }
 }
 
 module.exports.login = (req, res) => {
