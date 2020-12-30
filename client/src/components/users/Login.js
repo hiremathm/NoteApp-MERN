@@ -1,20 +1,23 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useState, useCallback, useReducer } from 'react'
+import { useForm } from '../../hooks/form-hook'
 import axios from '../../config/config'
 // import axios from 'axios'
 // import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
 
 import Input from '../ui/Input'
 import Button from '../ui/Button'
+import Card from '../ui/Card'
 
 import '../css/Auth.css'
 import '../css/Button.css'
 
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_MIN} from '../../util/validators'
 
-const loginReducer = (state, action) => {
+/*const loginReducer = (state, action) => {
     switch(action.type){
         case 'INPUT_CHANGE':
             let formIsValid = true
+            
             for(const inputId in state.inputs){
                 if(inputId === action.inputId){
                     formIsValid = formIsValid && action.isValid
@@ -39,10 +42,24 @@ const loginReducer = (state, action) => {
             return state;
     }
 }
-
+*/
 const Login = props => {
+    const [isLogin, setIsLogin] = useState(true)
+    const [isInvalidInput, setInvalidInput] = useState(false)
+    const [invalidInputError, setInvalidInputError] = useState()
+    const [formState, inputHandler, setFormData] = useForm({
+            email: {
+                value: '',
+                isValid: false
+            },
+            password: {
+                value: '',
+                isValid: false
+            }
+        }, false)
 
-    const [formState, dispactchLoginForm] = useReducer(loginReducer, {
+
+/*    const [formState, dispactchLoginForm] = useReducer(loginReducer, {
         inputs: {
             email: {
                 value: '',
@@ -62,23 +79,44 @@ const Login = props => {
             value, isValid, inputId: id
         })
     }, [])
-
+*/
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const formData = {
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value
+        let formData = {}
+
+        if(isLogin){
+            formData = {
+                email: formState.inputs.email.value,
+                password: formState.inputs.password.value
+            }
+        }else{        
+            formData = {
+                email: formState.inputs.email.value,
+                password: formState.inputs.password.value,
+                name: formState.inputs.name.value,
+                mobile: "0123456789"
+            }
+        }
+
+
+        let url = ""
+        if (isLogin){
+            url = "/users/login"
+        }else{
+            url = "/users"
         }
 
         axios({
-            url: '/users/login',
+            url: url,
             method: 'POST',
             data: formData
         })
         .then(user => {
             if(user.data.errors){
-                console.log("user logged errors", user)
+                setInvalidInput(true)
+                setInvalidInputError(user.data.errors)
+                console.log("user logged errors", user.data.errors)
             }else{
                 localStorage.setItem('userAuthToken', user.data.token)
                 props.history.push('/account')
@@ -90,34 +128,77 @@ const Login = props => {
 
     }
 
-    return (
-        <form onSubmit = {handleSubmit} className = "login-form">
-            <Input 
-                type = "text"
-                id = "email"
-                placeholder = "Enter email"
-                element = "input"
-                label = "Email"
-                onInput = {inputHandler}
-                errorText = "Please enter valid email."
-                validators = {[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
-            />
 
-            <Input 
-                type = "password"
-                id = "password"
-                placeholder = "Enter password"
-                element = "input"
-                label = "Password"
-                onInput = {inputHandler}
-                errorText = "Please enter valid password."
-                validators = {[VALIDATOR_REQUIRE(), VALIDATOR_MIN(6)]}
-            />
+    const changeAuthHandler = () => {
+        if(!isLogin){
+            setFormData({
+                ...formState.inputs,
+                name: {
+                    value: 'Guest',
+                    isValid: false
+                }
+            },formState.inputs.email.isValid && formState.inputs.password.isValid)
+        }else{
+            setFormData({
+                ...formState.inputs,
+                name: {
+                    value: 'Guest',
+                    isValid: false
+                }
+            },false)
+        }
+        setIsLogin(!isLogin)
+    }
+
+    return (
+        <>
+            <Card className = "authentication">
+            {isInvalidInput ? <p>{invalidInputError}</p> : null}
+            <form onSubmit = {handleSubmit}>
+                <h4>{`${isLogin ? 'LOGIN' : 'SIGNUP'}`}</h4>
+                <hr/>
+                {!isLogin && (
+                    <Input 
+                        type = "text"
+                        id = "name"
+                        placeholder = "Enter Username"
+                        element = "input"
+                        label = "Username"
+                        onInput = {inputHandler}
+                        errorText = "Please enter valid username of minimum length 5."
+                        validators = {[VALIDATOR_REQUIRE(),VALIDATOR_MIN(5)]}
+                    />
+                )}
+
+                <Input 
+                    type = "text"
+                    id = "email"
+                    placeholder = "Enter email"
+                    element = "input"
+                    label = "Email"
+                    onInput = {inputHandler}
+                    errorText = "Please enter valid email."
+                    validators = {[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
+                />
+
+                <Input 
+                    type = "password"
+                    id = "password"
+                    placeholder = "Enter password"
+                    element = "input"
+                    label = "Password"
+                    onInput = {inputHandler}
+                    errorText = "Please enter valid password."
+                    validators = {[VALIDATOR_REQUIRE(), VALIDATOR_MIN(6)]}
+                />
 
                 <Button type="submit" size = "small" disabled={!formState.formIsValid}>
-                    Login
+                    {`${isLogin ? 'LOGIN' : 'SIGNUP'}`}
                 </Button>
-        </form>
+            </form>
+            <Button size ="small" onClick = {changeAuthHandler}>SWITCH TO {`${isLogin ? 'SIGNUP' : 'LOGIN'}`}</Button>
+            </Card>
+        </>
     )
 }
 

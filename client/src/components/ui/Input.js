@@ -51,7 +51,7 @@ const Input = (props) => {
 	const element = props.element === 'input' ? (<input 
 			type = {props.type} 
 			id = {props.id}
-			placeholder = {props.placeHolder}
+			placeholder = {props.placeholder}
 			className={`form-control`}
 			onChange = {inputChangeHandler}
 			value = {inputState.value}
@@ -64,14 +64,13 @@ const Input = (props) => {
 			value = {inputState.value}
 			onBlur = {touchHandler}
 		/>)
-
-  return (
-		<div className ={!inputState.isValid && inputState.isTouched && 'form-control--invalid'}>
-  		<label htmlFor={props.id}>{props.label}</label>
-  		{element}
-  		{!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
-		</div>
-  );
+  		return (
+			<div className ={`form ${!inputState.isValid && inputState.isTouched && 'form-control--invalid'}`}>
+  				<label htmlFor={props.id}>{props.label}</label>
+  				{element}
+  				{!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
+			</div>
+  		);
 }
 
 export default Input;

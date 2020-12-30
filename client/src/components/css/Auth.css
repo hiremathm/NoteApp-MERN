@@ -1,12 +1,17 @@
 .authentication {
 	width: 90%;
-	max-width: 25rem;
+	max-width: 20rem;
 	margin: 7rem auto;
 	text-align: center;
+  height: 100%;
+}
+
+.authentication p {
+  color: red;
 }
 
 .authentication form {
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 .authentication__header {

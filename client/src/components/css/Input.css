@@ -1,5 +1,5 @@
 .form-control {
-  /*margin: 1rem 0;*/
+  /*margin: 0.5rem 0;*/
 }
 
 .form-control label,
@@ -8,9 +8,10 @@
   display: block;
 }
 
-.form-control label {
+.form label {
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  /*margin-top: 0.5rem;*/
+  color: 'red';
 }
 
 .form-control input,
@@ -19,7 +20,7 @@
   font: inherit;
   border: 1px solid #ccc;
   background: #f8f8f8;
-  padding: 0.15rem 0.25rem;
+  /*padding: 0.15rem 0.25rem;*/
 }
 
 .form-control input:focus,
@@ -38,8 +39,4 @@
 .form-control--invalid textarea {
   border-color: red;
   background: #ffd1d1;
-}
-
-.input-fieldset {
-  border: 2px solid;
 }

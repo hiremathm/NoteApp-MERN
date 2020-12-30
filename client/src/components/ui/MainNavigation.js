@@ -33,7 +33,6 @@ const MainNavigation = (props) => {
 							{	_.isEmpty(props.user) ?
 			                	(
 				             		<>
-				                    	<NavLink to="/register">Register</NavLink>
 				                    	<NavLink to="/login"><IoLogIn size = {25} className = "icon"/> Login</NavLink>
 				                	</>
 			                	)
