@@ -7,46 +7,15 @@ import axios from '../../config/config'
 import Input from '../ui/Input'
 import Button from '../ui/Button'
 import Card from '../ui/Card'
-
+import LoadingSpinner from '../ui/LoadingSpinner'
 import '../css/Auth.css'
 import '../css/Button.css'
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_MIN} from '../../util/validators'
 
+import { AuthContext } from '../../context/AuthContext'
 
-import {AuthContext} from '../../context/AuthContext'
-
-/*const loginReducer = (state, action) => {
-    switch(action.type){
-        case 'INPUT_CHANGE':
-            let formIsValid = true
-            
-            for(const inputId in state.inputs){
-                if(inputId === action.inputId){
-                    formIsValid = formIsValid && action.isValid
-                }else{
-                    formIsValid = formIsValid && state.inputs[inputId].isValid
-                }
-            }
-
-            let updatedState = {
-                ...state,
-                inputs: {
-                    ...state.inputs,
-                    [action.inputId]: {
-                        value: action.value,
-                        isValid: action.isValid
-                    }
-                },
-                formIsValid
-            }
-            return updatedState;
-        default: 
-            return state;
-    }
-}
-*/
 const Login = props => {
-    const [isLogin, setIsLogin] = useState(true)
+    const [isLoginMode, setisLoginMode] = useState(true)
     const [isInvalidInput, setInvalidInput] = useState(false)
     const [invalidInputError, setInvalidInputError] = useState()
     const [isLoading, setIsLoading] = useState(false)
@@ -63,34 +32,34 @@ const Login = props => {
         }, false)
 
     const auth = useContext(AuthContext)
+    
+    const changeAuthHandler = () => {
+        if(!isLoginMode){
+            setFormData({
+                ...formState.inputs,
+                name: {
+                    value: 'Guest',
+                    isValid: false
+                }
+            },formState.inputs.email.isValid && formState.inputs.password.isValid)
+        }else{
+            setFormData({
+                ...formState.inputs,
+                name: {
+                    value: 'Guest',
+                    isValid: false
+                }
+            },false)
+        }
+        setisLoginMode(!isLoginMode)
+    }
 
-/*    const [formState, dispactchLoginForm] = useReducer(loginReducer, {
-        inputs: {
-            email: {
-                value: '',
-                isValid: false
-            },
-            password: {
-                value: '',
-                isValid: false
-            }
-        },
-        formIsValid: false
-    })
-
-    const inputHandler = useCallback((id, value, isValid) => {
-        dispactchLoginForm({
-            type: 'INPUT_CHANGE',
-            value, isValid, inputId: id
-        })
-    }, [])
-*/
     const handleSubmit = (e) => {
         e.preventDefault()
 
         let formData = {}
 
-        if(isLogin){
+        if(isLoginMode){
             formData = {
                 email: formState.inputs.email.value,
                 password: formState.inputs.password.value
@@ -106,7 +75,7 @@ const Login = props => {
 
 
         let url = ""
-        if (isLogin){
+        if (isLoginMode){
             url = "/users/login"
         }else{
             url = "/users"
@@ -127,13 +96,16 @@ const Login = props => {
                 setIsLoading(false)
             }else{
          
-                if (isLogin){
+                if (isLoginMode){
+                    console.log("USER", user)
                     localStorage.setItem('userAuthToken', user.data.token)
+                    setIsLoading(false)
                     auth.login()
                     props.history.push('/notes')
                 }else{
                     console.log("SIGNUP RESPONSE", user)
-                    setIsLogin(true)
+                    setIsLoading(false)
+                    auth.login()
                 }
             }
         })
@@ -143,36 +115,15 @@ const Login = props => {
         })
     }
 
-
-    const changeAuthHandler = () => {
-        if(!isLogin){
-            setFormData({
-                ...formState.inputs,
-                name: {
-                    value: 'Guest',
-                    isValid: false
-                }
-            },formState.inputs.email.isValid && formState.inputs.password.isValid)
-        }else{
-            setFormData({
-                ...formState.inputs,
-                name: {
-                    value: 'Guest',
-                    isValid: false
-                }
-            },false)
-        }
-        setIsLogin(!isLogin)
-    }
-
     return (
         <>
             <Card className = "authentication">
             {isInvalidInput ? <p>{invalidInputError}</p> : null}
+            {isLoading && <LoadingSpinner asOverlay/>}
             <form onSubmit = {handleSubmit}>
-                <h4>{`${isLogin ? 'LOGIN' : 'SIGNUP'}`}</h4>
+                <h4>{`${isLoginMode ? 'LOGIN' : 'SIGNUP'}`}</h4>
                 <hr/>
-                {!isLogin && (
+                {!isLoginMode && (
                     <Input 
                         type = "text"
                         id = "name"
@@ -208,10 +159,10 @@ const Login = props => {
                 />
 
                 <Button type="submit" size = "small" disabled={!formState.formIsValid}>
-                    {`${isLogin ? 'LOGIN' : 'SIGNUP'}`}
+                    {`${isLoginMode ? 'LOGIN' : 'SIGNUP'}`}
                 </Button>
             </form>
-            <Button size ="small" onClick = {changeAuthHandler}>SWITCH TO {`${isLogin ? 'SIGNUP' : 'LOGIN'}`}</Button>
+            <Button size ="small" onClick = {changeAuthHandler}>SWITCH TO {`${isLoginMode ? 'SIGNUP' : 'LOGIN'}`}</Button>
             </Card>
         </>
     )
@@ -294,6 +245,39 @@ class Login extends React.Component {
                 </ToastBody>
             </Toast>
         )
+    }
+}
+*/
+
+
+
+/*const loginReducer = (state, action) => {
+    switch(action.type){
+        case 'INPUT_CHANGE':
+            let formIsValid = true
+            
+            for(const inputId in state.inputs){
+                if(inputId === action.inputId){
+                    formIsValid = formIsValid && action.isValid
+                }else{
+                    formIsValid = formIsValid && state.inputs[inputId].isValid
+                }
+            }
+
+            let updatedState = {
+                ...state,
+                inputs: {
+                    ...state.inputs,
+                    [action.inputId]: {
+                        value: action.value,
+                        isValid: action.isValid
+                    }
+                },
+                formIsValid
+            }
+            return updatedState;
+        default: 
+            return state;
     }
 }
 */

@@ -2,7 +2,7 @@ import React,{useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import _ from 'lodash'
+// import _ from 'lodash'
 import '../css/NavLinks.css'
 
 import {AuthContext} from '../../context/AuthContext'

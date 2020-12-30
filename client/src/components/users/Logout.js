@@ -1,12 +1,18 @@
-import React from 'react'
+import React,{useEffect,useContext} from 'react'
 import axios from '../../config/config'
 // import axios from 'axios'
 
 import {connect} from 'react-redux'
 import {resetUser} from '../../actions/user'
 
-class Logout extends React.Component {
-    componentDidMount = () => {
+import { AuthContext } from '../../context/AuthContext'
+
+import LoadingSpinner from '../ui/LoadingSpinner'
+
+const Logout = (props) => {
+    const auth = useContext(AuthContext)
+
+    useEffect(() => {
         const token = localStorage.getItem("userAuthToken")
         const url = "/users/logout"
         if(token){
@@ -19,22 +25,17 @@ class Logout extends React.Component {
             .then(response => {
                 console.log("logout response", response.data)
                 localStorage.removeItem("userAuthToken")
-                this.props.dispatch(resetUser())
+                props.dispatch(resetUser())
                 // this.props.handleIsAuthenticated(false)
-                this.props.history.push('/login')
+                // this.props.history.push('/login')
+                auth.logout()
             })
             .catch(error => {
                 console.log("error", error)
             })
         }
-    }
-
-    render(){
-        return(
-            <div>
-            </div>
-        )
-    }
+    },[])
+    return <LoadingSpinner asOverlay/>
 }
 
 export default connect()(Logout);

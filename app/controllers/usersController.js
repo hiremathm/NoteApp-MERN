@@ -12,18 +12,18 @@ module.exports.users = (req, res) => {
         })
 }
 
-module.exports.create = (req,res) => {
+module.exports.create = async (req,res) => {
     const body = req.body
     
-    let user = User.find({email: body.email})
-
+    let user = await User.findOne({email: body.email})
+        
     if(user){
         res.send({errors:'Email already exists, Please try login!'})
     }else{
-        user = new User(body)
-        user.save()
+        let newuser = new User(body)
+        newuser.save()
             .then(user => {
-               res.json(user)
+               res.json(newuser)
             })
             .catch(error=> {
                 res.json(error)

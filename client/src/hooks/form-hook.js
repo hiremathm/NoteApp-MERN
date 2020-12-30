@@ -53,7 +53,6 @@ export const useForm = (initialInputs, initialFormValidity) => {
         })
     }, [])
 
-    // console.log("FORM STATE", formState)
     const setFormData = useCallback((inputData, formIsValid) => {
         dispactchLoginForm({
             type: 'SET_DATA',
