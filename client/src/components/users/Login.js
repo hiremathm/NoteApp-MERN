@@ -1,15 +1,16 @@
 import React, { useState, useContext} from 'react'
 import { useForm } from '../../hooks/form-hook'
 import axios from '../../config/config'
-// import axios from 'axios'
-// import {Col,Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader} from 'reactstrap'
 
 import Input from '../ui/Input'
 import Button from '../ui/Button'
 import Card from '../ui/Card'
 import LoadingSpinner from '../ui/LoadingSpinner'
+import ImageUpload from '../ui/ImageUpload'
+
 import '../css/Auth.css'
 import '../css/Button.css'
+
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_MIN} from '../../util/validators'
 
 import { AuthContext } from '../../context/AuthContext'
@@ -32,21 +33,33 @@ const Login = props => {
         }, false)
 
     const auth = useContext(AuthContext)
+
+    console.log("FORM STATE", formState)
     
     const changeAuthHandler = () => {
         if(!isLoginMode){
             setFormData({
                 ...formState.inputs,
-                name: {
-                    value: 'Guest',
-                    isValid: false
-                }
+                // name: {
+                //     value: 'Guest',
+                //     isValid: false,
+                // },
+                // image: {
+                //     value: undefined,
+                //     isValid: false
+                // }
+                name: undefined,
+                image: undefined
             },formState.inputs.email.isValid && formState.inputs.password.isValid)
         }else{
             setFormData({
                 ...formState.inputs,
                 name: {
                     value: 'Guest',
+                    isValid: false
+                },
+                image: {
+                    value: null,
                     isValid: false
                 }
             },false)
@@ -65,12 +78,12 @@ const Login = props => {
                 password: formState.inputs.password.value
             }
         }else{        
-            formData = {
-                email: formState.inputs.email.value,
-                password: formState.inputs.password.value,
-                name: formState.inputs.name.value,
-                mobile: "0123456789"
-            }
+            formData = new FormData();
+            formData.append('email', formState.inputs.email.value)
+            formData.append('password', formState.inputs.password.value)
+            formData.append('mobile', "0123456789")
+            formData.append('name', formState.inputs.name.value)
+            formData.append('image', formState.inputs.image.value)
         }
 
 
@@ -82,7 +95,7 @@ const Login = props => {
         }
 
         setIsLoading(true)
-
+        
         axios({
             url: url,
             method: 'POST',
@@ -157,6 +170,17 @@ const Login = props => {
                     errorText = "Please enter valid password."
                     validators = {[VALIDATOR_REQUIRE(), VALIDATOR_MIN(6)]}
                 />
+
+                {
+                    !isLoginMode && (
+                        <ImageUpload 
+                            id = "image"
+                            center
+                            onInput = {inputHandler}
+                        />
+                    )
+                }
+
 
                 <Button type="submit" size = "small" disabled={!formState.formIsValid}>
                     {`${isLoginMode ? 'LOGIN' : 'SIGNUP'}`}

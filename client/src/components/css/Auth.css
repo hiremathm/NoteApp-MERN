@@ -1,17 +1,16 @@
 .authentication {
-	width: 90%;
-	max-width: 20rem;
-	margin: 7rem auto;
-	text-align: center;
-  height: 100%;
-}
-
-.authentication p {
-  color: red;
+  width: 90%;
+  max-width: 25rem;
+  margin: 7rem auto;
+  text-align: center;
 }
 
 .authentication form {
   margin-bottom: 0rem;
+}
+
+.authentication p {
+  color: red;
 }
 
 .authentication__header {
@@ -42,4 +41,11 @@
   cursor: pointer;
   margin-top: 1rem;
   text-decoration: none;
+}
+
+.account_info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }

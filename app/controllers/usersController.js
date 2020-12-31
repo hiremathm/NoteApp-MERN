@@ -13,13 +13,15 @@ module.exports.users = (req, res) => {
 }
 
 module.exports.create = async (req,res) => {
-    const body = req.body
-    
+    let body = req.body
+    body['image'] = req.file.path
+
     let user = await User.findOne({email: body.email})
-        
+
     if(user){
         res.send({errors:'Email already exists, Please try login!'})
     }else{
+
         let newuser = new User(body)
         newuser.save()
             .then(user => {
@@ -33,6 +35,7 @@ module.exports.create = async (req,res) => {
 
 module.exports.login = (req, res) => {
     const body = req.body
+    console.log("BODY", body)
     User.findByCredentials(body)
         .then(user => {
             return user.generateToken()

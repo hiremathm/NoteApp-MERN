@@ -47,6 +47,7 @@ export const useForm = (initialInputs, initialFormValidity) => {
     })
 
     const inputHandler = useCallback((id, value, isValid) => {
+        console.log("FILE INPUT", id, value, isValid)
         dispactchLoginForm({
             type: 'INPUT_CHANGE',
             value, isValid, inputId: id

@@ -6,6 +6,8 @@ import {connect} from 'react-redux'
 import {setUser} from '../../actions/user'
 import {setNotes} from '../../actions/note'
 
+import '../css/Auth.css'
+
 class Account extends React.Component {
 
     constructor(){
@@ -30,7 +32,8 @@ class Account extends React.Component {
             .then(response => {
                 // this.setState({user: response.data})
                 const data = response.data 
-                data['image']  = '../../images/8c55fc47bc85ff21e09980d1c96d5565'
+                // data['image']  = '../../images/8c55fc47bc85ff21e09980d1c96d5565'
+                console.log("DATA", data.image)
                  this.props.dispatch(setUser(response.data))
                 // this.props.history.push('/notes')
             })
@@ -78,22 +81,17 @@ class Account extends React.Component {
     }
 
     render(){     
-        // console.log('images',this.state.image.path)
         return(
-            <div>
-                <div className="row">
-                    <div className="col-sm-5">
-                        <h2>Account Information</h2>
-                        
-                        {
-                           // <img src={require(`../../images/03221f0fc7631f5585a88ffef1fc096d`)} alt="Logo" width="350px" height="200px"/>
-                            // this.props.user.image && (<img src={require(`${this.props.user.image}`)} alt="Logo" width="350px" height="200px"/>)
-                        }
-                        <h4>Name : {this.props.user && this.props.user.name}</h4>
-                        <h6>Email : {this.props.user && this.props.user.email}</h6>
-                        <h6>Phone : {this.props.user && this.props.user.mobile}</h6>
-                    </div>
-                    <div className="col-sm-4">
+            <div className="account_info">
+                <h2>Account Information</h2>
+                
+                {
+                    this.props.user.image && <img src={require(`../../${this.props.user.image.replace("client/src/","")}`)} alt="Logo" width="200px" height="200px"/>
+                }
+                <h4>Name : {this.props.user && this.props.user.name}</h4>
+                <h6>Email : {this.props.user && this.props.user.email}</h6>
+                <h6>Phone : {this.props.user && this.props.user.mobile}</h6>
+{/*                    <div className="col-sm-4">
                         <form onSubmit={this.handleSubsmit} >
                             <h3>Change Profile</h3>
                             <label>
@@ -104,8 +102,8 @@ class Account extends React.Component {
                                 <input type="submit" className="btn btn-primary btn-sm" value="Upload" />
                             </label>
                         </form>
-                    </div>
-                </div>
+                    </div>*/}
+                
             </div>
         )
     }
