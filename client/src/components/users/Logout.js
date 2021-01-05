@@ -26,8 +26,6 @@ const Logout = (props) => {
                 console.log("logout response", response.data)
                 localStorage.removeItem("userAuthToken")
                 props.dispatch(resetUser())
-                // this.props.handleIsAuthenticated(false)
-                // this.props.history.push('/login')
                 auth.logout()
             })
             .catch(error => {

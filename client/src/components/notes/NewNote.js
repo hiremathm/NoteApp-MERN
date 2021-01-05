@@ -1,16 +1,22 @@
-import React from 'react'
+import React,{useState} from 'react'
 import axios from '../../config/config'
 // import axios from 'axios'
 
-import {addNote} from '../../actions/note'
+import {setNotes} from '../../actions/note'
 import {connect} from 'react-redux'
 import Form from './Form'
 
+import LoadingSpinner from '../ui/LoadingSpinner'
 
-class NewNote extends React.Component {
-    handleSubmit = (formData) => {
+import {useDispatch} from 'react-redux'
+
+
+const NewNote = (props) => {
+    const dispatch = useDispatch()
+
+    const [isLoading, setIsLoading] = useState(false)
+    const handleSubmit = (formData) => {
         let token = localStorage.getItem('userAuthToken')
-        console.log("TOKEN IN POST CREATION", token)
         let url = "/notes"
         axios({
             method: 'post',
@@ -19,24 +25,22 @@ class NewNote extends React.Component {
             headers: {"x-auth": token}
         })
         .then(response => {
-            console.log("response", response)
-            this.props.dispatch(addNote(response.data))
-            this.props.history.push(`/notes`)
+            dispatch(setNotes())
+            props.history.push(`/notes`)
         })
         .catch(error => {
             console.log("error", error)
         })
     }
 
-    render(){
-        return(
-            <div>
-                <h3>New Note</h3>
+    return(
+        <div>
+            <h3>New Note</h3>
 
-                <Form handleSubmit={this.handleSubmit} />
-            </div>
-        )
-    }
+            <Form handleSubmit={handleSubmit} />
+        </div>
+    )
+
 }
 
-export default connect()(NewNote)
+export default NewNote

@@ -2,7 +2,11 @@ import React,{useState, useCallback, useEffect} from 'react'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
 // actions
-import {connect} from 'react-redux'
+import {setUser} from './actions/user'
+import {setNotes} from './actions/note'
+
+// import {connect} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
@@ -27,35 +31,40 @@ import Account from './components/users/Account'
 import Logout from './components/users/Logout'
 
 import MainNavigation from './components/ui/MainNavigation'
-
 import {AuthContext} from './context/AuthContext'
 
+import LoadingSpinner from './components/ui/LoadingSpinner'
+
 const App = (props) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
+
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     
-    const login = useCallback(() => {
+    const login = useCallback(() => {        
         setIsLoggedIn(true)
     },[])
 
     const logout = useCallback(() => {
+        localStorage.removeItem('userAuthToken')
         setIsLoggedIn(false)
     },[])
 
-
     useEffect(() => {
         if(localStorage.getItem('userAuthToken')){
+            dispatch(setUser())
+            dispatch(setNotes())
             setIsLoggedIn(true)
         }else{
+            setIsLoading(false)
             setIsLoggedIn(false)
         }       
-    })
-
+    },[setIsLoggedIn, setIsLoading])
 
     return (
         <AuthContext.Provider value = {{isLoggedIn, login, logout}}>
             <BrowserRouter>
                 <MainNavigation />
-
                 <main>
                     <Switch>
                         {isLoggedIn ? (
@@ -94,8 +103,10 @@ const App = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {user: state.user}
-}
+export default App;
 
-export default connect(mapStateToProps)(App);
+// const mapStateToProps = (state) => {
+//     return {user: state.user}
+// }
+
+// export default connect(mapStateToProps)(App);

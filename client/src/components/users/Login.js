@@ -15,7 +15,15 @@ import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_MIN} from '../../util/vali
 
 import { AuthContext } from '../../context/AuthContext'
 
+import {setUser} from '../../actions/user'
+import {setNotes} from '../../actions/note'
+
+
+import {useDispatch} from 'react-redux'
+
 const Login = props => {
+    const dispatch = useDispatch()
+
     const [isLoginMode, setisLoginMode] = useState(true)
     const [isInvalidInput, setInvalidInput] = useState(false)
     const [invalidInputError, setInvalidInputError] = useState()
@@ -34,8 +42,6 @@ const Login = props => {
 
     const auth = useContext(AuthContext)
 
-    console.log("FORM STATE", formState)
-    
     const changeAuthHandler = () => {
         if(!isLoginMode){
             setFormData({
@@ -114,6 +120,12 @@ const Login = props => {
                     localStorage.setItem('userAuthToken', user.data.token)
                     setIsLoading(false)
                     auth.login()
+                    setTimeout(() =>{
+                        auth.logout()
+                    }, 3600000)
+                    dispatch(setUser())
+                    dispatch(setNotes())
+
                     props.history.push('/notes')
                 }else{
                     console.log("SIGNUP RESPONSE", user)

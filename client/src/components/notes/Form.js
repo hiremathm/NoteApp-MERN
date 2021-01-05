@@ -39,7 +39,6 @@ class Form extends React.Component {
                 return {tag: tag._id, name: tag.name}}
                 )
         }
-        console.log('formdata', formData)
         this.props.handleSubmit(formData)
     }
 
@@ -108,8 +107,6 @@ class Form extends React.Component {
                 })
             )
         }
-        console.log("hello shiva", this.state.selectedTags) 
-
         axios.get('/tags')
         .then(response => {
             this.setState({tags: response.data.map(tag =>{return {_id: tag._id, name: tag.name}})})
@@ -119,8 +116,6 @@ class Form extends React.Component {
         })
     }
     render(){
-        console.log('selected tags inside render ', this.state.selectedTags)
-        console.log('tags inside render ', this.state.tags)
         return(
             <div>
                 <form onSubmit={this.handleSubmit} ref="form">
