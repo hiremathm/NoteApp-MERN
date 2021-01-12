@@ -17,7 +17,6 @@ const NoteList = () => {
 
     return(
         <div className="container" >                
-            <LoadingSpinner asOverlay/>
             <div className="row">
                 <div className="col-md-8 col-sm-8 col-xs-8 col-lg-8">
                     { <Link to="/notes/new">Create Note</Link> }
