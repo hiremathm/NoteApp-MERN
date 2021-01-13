@@ -130,7 +130,8 @@ const Login = props => {
                 }else{
                     console.log("SIGNUP RESPONSE", user)
                     setIsLoading(false)
-                    auth.login()
+                    // auth.login()
+                    setisLoginMode(true)
                 }
             }
         })

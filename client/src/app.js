@@ -56,6 +56,7 @@ const App = (props) => {
             dispatch(setNotes())
             setIsLoggedIn(true)
         }else{
+            console.log("SET IS LOADING TO FALSE")
             setIsLoading(false)
             setIsLoggedIn(false)
         }       

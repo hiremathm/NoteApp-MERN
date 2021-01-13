@@ -5,6 +5,7 @@ export const setNotes = () => {
 		const token = localStorage.getItem('userAuthToken') 		
 		const url = "/notes"
 
+		console.log("TOKEN IN SETNOTES", token)
 		try {
 			// const response = await fetch(url, {
 			// 	method: 'GET',
