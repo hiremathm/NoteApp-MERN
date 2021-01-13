@@ -1,12 +1,12 @@
-import React,{useState} from 'react'
+import React from 'react'
 import axios from '../../config/config'
 // import axios from 'axios'
 
 import {setNotes} from '../../actions/note'
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 import Form from './Form'
 
-import LoadingSpinner from '../ui/LoadingSpinner'
+// import LoadingSpinner from '../ui/LoadingSpinner'
 
 import {useDispatch} from 'react-redux'
 
@@ -14,7 +14,7 @@ import {useDispatch} from 'react-redux'
 const NewNote = (props) => {
     const dispatch = useDispatch()
 
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
     const handleSubmit = (formData) => {
         let token = localStorage.getItem('userAuthToken')
         let url = "/notes"

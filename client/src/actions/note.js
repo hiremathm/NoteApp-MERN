@@ -1,18 +1,29 @@
+import axios from '../config/config'
+
 export const setNotes = () => {
 	return async (dispatch, getState) => {
 		const token = localStorage.getItem('userAuthToken') 		
-		const url = "http://localhost:6060/api/notes"
+		const url = "/notes"
 
 		try {
-			const response = await fetch(url, {
-				method: 'GET',
-				data: {},
-				headers: {
-					'x-auth': token
-				}
-			})
+			// const response = await fetch(url, {
+			// 	method: 'GET',
+			// 	data: {},
+			// 	headers: {
+			// 		'x-auth': token
+			// 	}
+			// })
+			// const responseData = await response.json()
 
-			const responseData = await response.json()
+			const response = await axios({
+            	method: 'GET',
+            	url: url,
+            	data: {},
+            	headers: {"x-auth": token}
+        	})
+
+		    const responseData = await response.data
+
     		dispatch({type: 'SET_NOTES',payload: responseData})
 		}catch(error){
 			console.log("NOTES LIST ERROR ", error)

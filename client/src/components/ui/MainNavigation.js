@@ -10,7 +10,7 @@ import BackDrop from './BackDrop'
 
 import {connect} from 'react-redux'
 
-import _ from 'lodash'
+// import _ from 'lodash'
 
 import {AuthContext} from '../../context/AuthContext'
 

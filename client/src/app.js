@@ -33,7 +33,7 @@ import Logout from './components/users/Logout'
 import MainNavigation from './components/ui/MainNavigation'
 import {AuthContext} from './context/AuthContext'
 
-import LoadingSpinner from './components/ui/LoadingSpinner'
+// import LoadingSpinner from './components/ui/LoadingSpinner'
 
 const App = (props) => {
     const [isLoading, setIsLoading] = useState(false)
@@ -59,10 +59,10 @@ const App = (props) => {
             setIsLoading(false)
             setIsLoggedIn(false)
         }       
-    },[setIsLoggedIn, setIsLoading])
+    },[setIsLoggedIn, setIsLoading, dispatch])
 
     return (
-        <AuthContext.Provider value = {{isLoggedIn, login, logout}}>
+        <AuthContext.Provider value = {{isLoggedIn, login, logout, isLoading}}>
             <BrowserRouter>
                 <MainNavigation />
                 <main>

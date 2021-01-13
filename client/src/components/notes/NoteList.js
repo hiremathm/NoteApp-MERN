@@ -1,13 +1,13 @@
-import React,{ useState, useEffect } from 'react'
-import axios from '../../config/config'
+import React from 'react'
+// import axios from '../../config/config'
 import {Link} from 'react-router-dom'
 
-import {connect} from 'react-redux'
-import {setNotes} from '../../actions/note'
+// import {connect} from 'react-redux'
+// import {setNotes} from '../../actions/note'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css'
-import LoadingSpinner from '../ui/LoadingSpinner'
+// import LoadingSpinner from '../ui/LoadingSpinner'
 
 import {useSelector} from 'react-redux'
 

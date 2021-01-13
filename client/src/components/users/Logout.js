@@ -32,7 +32,7 @@ const Logout = (props) => {
                 console.log("error", error)
             })
         }
-    },[])
+    },[auth,props])
     return <LoadingSpinner asOverlay/>
 }
 
